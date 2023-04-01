@@ -1,0 +1,10 @@
+import 'package:core/core.dart';
+
+class {{model}}Model implements AbstractModel {
+  @override
+  final int id;
+
+  {{model}}Model({
+    required this.id,
+  });
+}

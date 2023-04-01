@@ -1,0 +1,1 @@
+export 'mapper/{{model | lowercase | underscore}}_mapper.dart';

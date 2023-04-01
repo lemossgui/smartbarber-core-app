@@ -1,0 +1,13 @@
+import 'package:core/core.dart';
+
+class {{model}}Mapper extends AbstractMapper<{{model}}Model> {
+  @override
+  {{model}}Model fromMap(Map<String, dynamic> map) {
+    return {{model}}Model();
+  }
+
+  @override
+  Map<String, dynamic> toMap({{model}}Model model) {
+    return <String, dynamic>{};
+  }
+}
