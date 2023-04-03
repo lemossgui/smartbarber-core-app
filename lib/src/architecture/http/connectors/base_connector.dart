@@ -19,15 +19,18 @@ abstract class BaseConnector extends GetConnect {
 
   T getResponseData<T>(Response responseRaw) {
     final response = mapResponseModel(responseRaw.body);
+    final error = response?.error;
 
     if (responseRaw.status.isForbidden) {
       handleForbidden();
       throw RemoteException(
-        message: response?.message ?? 'Usuário deslogado',
+        message: error?.message ?? 'Usuário deslogado',
+        key: error?.key,
       );
     } else if (response == null || !response.isSuccess) {
       throw RemoteException(
-        message: response?.message ?? 'Problema de comunicação com o servidor',
+        message: error?.message ?? 'Problema de comunicação com o servidor',
+        key: error?.key,
       );
     }
 
@@ -36,15 +39,19 @@ abstract class BaseConnector extends GetConnect {
 
   ResponseModel<T>? mapResponseModel<T>(Map<String, dynamic>? map) {
     if (map == null) return null;
-
-    return ResponseModel<T>(
-      data: map['data'] as T,
-      message: map['message'] as String?,
-      status: ResponseStatus.fromMap(map['status']),
-      errors: List.from(map['errors'] ?? List.empty()),
-      totalPages: map['totalPages'] as int?,
-      totalElements: map['totalElements'] as int?,
-    );
+    try {
+      final errorMap = map['error'];
+      return ResponseModel<T>(
+        data: map['data'] as T,
+        error: errorMap != null ? ResponseError.fromMap(errorMap) : null,
+        status: ResponseStatus.fromMap(map['status']),
+        errors: List.from(map['errors'] ?? List.empty()),
+        totalPages: map['totalPages'] as int?,
+        totalElements: map['totalElements'] as int?,
+      );
+    } catch (e) {
+      throw RemoteException(message: 'Falha na comunicação com o servidor');
+    }
   }
 
   void handleForbidden() {}

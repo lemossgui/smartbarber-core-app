@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:multiple_result/multiple_result.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +44,61 @@ abstract class BloC<Event> extends GetxController
       dispatch<ScreenState>(StableState());
       onFinish?.call();
     }
+  }
+
+  Future<void> handlePersist({
+    required Function action,
+    Function? onError,
+    Function? onFinish,
+    Object? loadingKey,
+  }) async {
+    try {
+      if (loadingKey != null) dispatch<bool?>(true, key: loadingKey);
+      await action();
+    } on Exception catch (_) {
+      if (loadingKey != null) dispatch<bool?>(false, key: loadingKey);
+      onError?.call();
+    } finally {
+      if (loadingKey != null) dispatch<bool?>(false, key: loadingKey);
+      onFinish?.call();
+    }
+  }
+
+  T getOrThrow<T>(Object key) {
+    final value = map[key];
+    if (value == null) {
+      throw MapException(message: 'Valor nulo para [$key]');
+    }
+    return value;
+  }
+
+  T mapNotNull<T>({
+    required Object key,
+    required Function() ifNull,
+  }) {
+    late T value;
+    try {
+      value = getOrThrow(key);
+      return value;
+    } on MapException catch (e) {
+      ifNull();
+      log(e.message);
+      return value;
+    }
+  }
+
+  bool validateStrings(List<Object> keys) {
+    bool isValid = true;
+
+    for (var key in keys) {
+      String? data = map[key];
+      if (data.isNullOrEmpty) {
+        dispatch<String?>(data, key: key);
+        isValid = false;
+      }
+    }
+
+    return isValid;
   }
 
   void showLoadingDialog<S, E>({

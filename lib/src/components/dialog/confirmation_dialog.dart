@@ -56,13 +56,13 @@ class ConfirmationDialog extends StatelessWidget {
       actions: [
         MyTextButton(
           onPressed: () => Get.back<bool>(result: false),
-          label: 'Fechar',
+          text: 'Fechar',
           textColor: Theme.of(context).colorScheme.onTertiaryContainer,
         ),
         MyTextButton(
           onPressed: () => Get.back<bool>(result: true),
-          label: 'Confirmar',
-          backgroundColor: Theme.of(context).colorScheme.tertiary,
+          text: 'Confirmar',
+          color: Theme.of(context).colorScheme.tertiary,
           textColor: Theme.of(context).colorScheme.onTertiary,
         )
       ],

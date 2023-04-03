@@ -14,7 +14,7 @@ class SessionRepositoryImpl implements SessionRepository {
       final result = await local.save(model);
       return Success(result);
     } on StorageException catch (e) {
-      final failure = Failure(e.message);
+      final failure = Failure.fromStorage(e);
       return Error(failure);
     }
   }
@@ -25,7 +25,7 @@ class SessionRepositoryImpl implements SessionRepository {
       final result = await local.get();
       return Success(result);
     } on StorageException catch (e) {
-      final failure = Failure(e.message);
+      final failure = Failure.fromStorage(e);
       return Error(failure);
     }
   }
@@ -36,7 +36,7 @@ class SessionRepositoryImpl implements SessionRepository {
       final result = await local.clear();
       return Success(result);
     } on StorageException catch (e) {
-      final failure = Failure(e.message);
+      final failure = Failure.fromStorage(e);
       return Error(failure);
     }
   }

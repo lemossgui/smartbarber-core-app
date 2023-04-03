@@ -1,6 +1,5 @@
-import 'package:lottie/lottie.dart';
-import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:get/get.dart';
 
 class InfoDialog extends StatelessWidget {

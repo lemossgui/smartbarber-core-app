@@ -14,8 +14,8 @@ class DynamicVisibility extends StatelessWidget {
   Widget build(BuildContext context) {
     return Visibility(
       visible: isVisible,
-      child: child,
       replacement: const SizedBox.shrink(),
+      child: child,
     );
   }
 }

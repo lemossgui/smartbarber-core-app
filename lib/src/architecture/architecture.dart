@@ -3,6 +3,7 @@ export 'bloc/bloc.dart';
 export 'bloc/persisting_state.dart';
 export 'bloc/screen_state.dart';
 export 'bloc/screen.dart';
+export 'bloc/map_exception.dart';
 export 'constants/padding_constants.dart';
 export 'extensions/extensions.dart';
 export 'failure/failure.dart';

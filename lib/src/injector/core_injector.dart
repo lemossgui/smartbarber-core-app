@@ -9,5 +9,6 @@ class CoreInjector extends Injector {
     CityInjector().dependencies();
     AddressInjector().dependencies();
     BarbershopInjector().dependencies();
+    RegistrationInjector().dependencies();
   }
 }

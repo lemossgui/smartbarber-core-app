@@ -64,6 +64,11 @@ const lightColorScheme = ColorScheme(
   scrim: Color(0xFF000000),
 );
 
+/// mao -> secondary
+/// manga -> tertiaryContainer
+/// fundo telefone -> surface varient
+/// borda telefone -> on background
+
 const darkColorScheme = ColorScheme(
   brightness: Brightness.dark,
   primary: Color(0xFFFBBB43),

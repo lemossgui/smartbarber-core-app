@@ -12,9 +12,17 @@ abstract class ScreenView<T> extends StatefulWidget {
   State<ScreenView<T>> createState() => _ScreenViewState<T>();
 
   Widget build(BuildContext context);
+
+  void onInit(BuildContext context) {}
 }
 
 class _ScreenViewState<T> extends State<ScreenView<T>> {
+  @override
+  void initState() {
+    widget.onInit(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

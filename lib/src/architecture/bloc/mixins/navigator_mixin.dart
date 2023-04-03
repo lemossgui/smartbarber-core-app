@@ -108,4 +108,29 @@ mixin NavigatorMixin {
       throw Exception(message);
     }
   }
+
+  Future<T?>? showBottomSheet<T>(
+    Widget bottomSheet, {
+    String? route,
+    dynamic arguments,
+    bool isDismissible = false,
+  }) {
+    Color? backgroundColor;
+
+    final context = Get.key.currentState?.context;
+    if (context != null) {
+      backgroundColor = Theme.of(context).colorScheme.background;
+    }
+
+    return Get.bottomSheet(
+      bottomSheet,
+      isScrollControlled: true,
+      backgroundColor: backgroundColor,
+      settings: RouteSettings(
+        name: route,
+        arguments: arguments,
+      ),
+      isDismissible: isDismissible,
+    );
+  }
 }

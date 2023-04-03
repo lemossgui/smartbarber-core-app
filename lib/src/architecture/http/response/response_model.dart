@@ -2,7 +2,7 @@ import 'package:core/core.dart';
 
 class ResponseModel<T> {
   final T? data;
-  final String? message;
+  final ResponseError? error;
   final ResponseStatus status;
   final List<String>? errors;
   final int? totalPages;
@@ -10,7 +10,7 @@ class ResponseModel<T> {
 
   ResponseModel({
     this.data,
-    this.message,
+    this.error,
     required this.status,
     this.errors,
     this.totalPages,

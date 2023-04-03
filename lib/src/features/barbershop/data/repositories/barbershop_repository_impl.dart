@@ -14,7 +14,7 @@ class BarbershopRepositoryImpl implements BarbershopRepository {
       final result = await remote.findById(id);
       return Success(result);
     } on RemoteException catch (e) {
-      final failure = Failure(e.message);
+      final failure = Failure.fromRemote(e);
       return Error(failure);
     }
   }
